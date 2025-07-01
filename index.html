@@ -3,255 +3,396 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ideas 3D - Inspiración para Makers e Impresión 3D FDM</title>
-    <meta name="description" content="Generador de ideas creativas para impresión 3D FDM, diseñadores y makers. Proyectos print-in-place, mecanismos y descargas gratuitas.">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <title>Printaplab 3D Store - Enlaces Sociales</title>
     <style>
-        /* [TODO: Dejé todo igual que el original, ya corregido] */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(45deg, #ff6b35, #f7931e, #ffd23f, #06ffa5, #00d4ff, #7b68ee, #ff69b4);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Enhanced animated background particles */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: floatEnhanced 10s ease-in-out infinite;
+        }
+
+        .particle:nth-child(1) { width: 8px; height: 8px; left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { width: 12px; height: 12px; left: 20%; animation-delay: 1.5s; }
+        .particle:nth-child(3) { width: 6px; height: 6px; left: 30%; animation-delay: 3s; }
+        .particle:nth-child(4) { width: 10px; height: 10px; left: 40%; animation-delay: 4.5s; }
+        .particle:nth-child(5) { width: 14px; height: 14px; left: 50%; animation-delay: 6s; }
+        .particle:nth-child(6) { width: 9px; height: 9px; left: 60%; animation-delay: 7.5s; }
+        .particle:nth-child(7) { width: 11px; height: 11px; left: 70%; animation-delay: 2s; }
+        .particle:nth-child(8) { width: 7px; height: 7px; left: 80%; animation-delay: 3.5s; }
+        .particle:nth-child(9) { width: 13px; height: 13px; left: 90%; animation-delay: 5s; }
+
+        @keyframes floatEnhanced {
+            0%, 100% { 
+                transform: translateY(100vh) rotate(0deg) scale(0);
+                opacity: 0;
+            }
+            10% { 
+                opacity: 1;
+                transform: translateY(90vh) rotate(36deg) scale(1);
+            }
+            90% { 
+                opacity: 1;
+                transform: translateY(-10vh) rotate(324deg) scale(1);
+            }
+            100% { 
+                transform: translateY(-20vh) rotate(360deg) scale(0);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(25px);
+            border-radius: 25px;
+            padding: 45px 35px;
+            box-shadow: 
+                0 30px 60px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            animation: containerFloat 0.8s ease-out, containerGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes containerFloat {
+            from { 
+                opacity: 0; 
+                transform: translateY(50px) scale(0.9); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0) scale(1); 
+            }
+        }
+
+        @keyframes containerGlow {
+            0%, 100% { box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2); }
+            50% { box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 0 30px rgba(255, 255, 255, 0.1); }
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(45deg, #ff6b35, #f7931e, #ffd23f, #06ffa5, #00d4ff, #7b68ee, #ff69b4, #ff6b35);
+            background-size: 300% 300%;
+            animation: logoGradient 3s ease infinite, logoSpin 8s linear infinite, logoPulse 2s ease-in-out infinite;
+            border-radius: 50%;
+            margin: 0 auto 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 900;
+            color: white;
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.4),
+                0 0 20px rgba(255, 255, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+            text-align: center;
+            line-height: 1.1;
+            letter-spacing: -0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: logoShine 3s ease-in-out infinite;
+        }
+
+        @keyframes logoGradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes logoSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes logoPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes logoShine {
+            0% { transform: rotate(0deg); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: rotate(90deg); opacity: 0; }
+        }
+
+        .title {
+            color: white;
+            font-size: 28px;
+            font-weight: 900;
+            margin-bottom: 12px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+            animation: titleGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes titleGlow {
+            0%, 100% { text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5); }
+            50% { text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 255, 255, 0.3); }
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 16px;
+            margin-bottom: 35px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-weight: 500;
+        }
+
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .social-link {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 20px 30px;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            font-size: 17px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            position: relative;
+            overflow: hidden;
+            transform: translateY(0);
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.6s;
+        }
+
+        .social-link:hover::before {
+            left: 100%;
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.4),
+                0 0 30px rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .social-link:active {
+            transform: translateY(-2px) scale(1.01);
+        }
+
+        .social-icon {
+            width: 28px;
+            height: 28px;
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+        }
+
+        /* Enhanced specific colors for each platform */
+        .ciciai {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(139, 92, 246, 0.3));
+            border-color: rgba(99, 102, 241, 0.4);
+        }
+
+        .ciciai:hover {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.5), rgba(139, 92, 246, 0.5));
+            border-color: rgba(99, 102, 241, 0.7);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3), 0 0 30px rgba(99, 102, 241, 0.2);
+        }
+
+        .cults3d {
+            background: linear-gradient(135deg, rgba(244, 63, 94, 0.3), rgba(236, 72, 153, 0.3));
+            border-color: rgba(244, 63, 94, 0.4);
+        }
+
+        .cults3d:hover {
+            background: linear-gradient(135deg, rgba(244, 63, 94, 0.5), rgba(236, 72, 153, 0.5));
+            border-color: rgba(244, 63, 94, 0.7);
+            box-shadow: 0 20px 40px rgba(244, 63, 94, 0.3), 0 0 30px rgba(244, 63, 94, 0.2);
+        }
+
+        .tiktok {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(255, 0, 80, 0.3));
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .tiktok:hover {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(255, 0, 80, 0.5));
+            border-color: rgba(255, 0, 80, 0.7);
+            box-shadow: 0 20px 40px rgba(255, 0, 80, 0.3), 0 0 30px rgba(255, 0, 80, 0.2);
+        }
+
+        .instagram {
+            background: linear-gradient(135deg, rgba(225, 48, 108, 0.3), rgba(255, 214, 0, 0.3), rgba(129, 52, 175, 0.3));
+            border-color: rgba(225, 48, 108, 0.4);
+        }
+
+        .instagram:hover {
+            background: linear-gradient(135deg, rgba(225, 48, 108, 0.5), rgba(255, 214, 0, 0.5), rgba(129, 52, 175, 0.5));
+            border-color: rgba(225, 48, 108, 0.7);
+            box-shadow: 0 20px 40px rgba(225, 48, 108, 0.3), 0 0 30px rgba(225, 48, 108, 0.2);
+        }
+
+        .footer {
+            margin-top: 35px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: footerPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes footerPulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        /* Mobile optimization */
+        @media (max-width: 480px) {
+            .container {
+                padding: 35px 25px;
+                margin: 10px;
+            }
+            
+            .logo {
+                width: 100px;
+                height: 100px;
+                font-size: 14px;
+            }
+            
+            .title {
+                font-size: 24px;
+            }
+            
+            .subtitle {
+                font-size: 15px;
+            }
+            
+            .social-link {
+                padding: 18px 25px;
+                font-size: 16px;
+            }
+
+            .social-icon {
+                width: 24px;
+                height: 24px;
+            }
+        }
     </style>
 </head>
 <body>
-    <header>
-        <nav class="container">
-            <div class="logo">
-                <i class="fas fa-cube"></i> Ideas 3D
-            </div>
-            <ul class="nav-links">
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#generador">Generador</a></li>
-                <li><a href="#recursos">Recursos</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
-        </nav>
-    </header>
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
 
-    <main>
-        <section id="inicio" class="hero">
-            <div class="container">
-                <h1><i class="fas fa-lightbulb"></i> Ideas Creativas para Impresión 3D</h1>
-                <p>Generador de conceptos innovadores para diseñadores y makers 3D</p>
-                <a href="#generador" class="cta-button">
-                    <i class="fas fa-rocket"></i> Generar Ideas Ahora
-                </a>
-            </div>
-        </section>
-
-        <section id="generador" class="container">
-            <div class="generator-section">
-                <h2 class="section-title">🎯 Generador de Ideas</h2>
-                <p class="section-subtitle">Selecciona una categoría para obtener ideas específicas</p>
-                
-                <div class="categories-grid">
-                    <div class="category-btn" data-category="printinplace">
-                        <div class="category-icon"><i class="fas fa-cogs"></i></div>
-                        <h3>Print-in-Place Viral</h3>
-                        <p>Mecanismos que se imprimen ya ensamblados</p>
-                    </div>
-                    <div class="category-btn" data-category="productos">
-                        <div class="category-icon"><i class="fas fa-tools"></i></div>
-                        <h3>Productos Innovadores</h3>
-                        <p>Herramientas y gadgets únicos</p>
-                    </div>
-                    <div class="category-btn" data-category="artistico">
-                        <div class="category-icon"><i class="fas fa-paint-brush"></i></div>
-                        <h3>Arte & Escultura</h3>
-                        <p>Proyectos creativos y artísticos</p>
-                    </div>
-                    <div class="category-btn" data-category="funcional">
-                        <div class="category-icon"><i class="fas fa-wrench"></i></div>
-                        <h3>Diseño Funcional</h3>
-                        <p>Soluciones prácticas del día a día</p>
-                    </div>
-                    <div class="category-btn" data-category="educativo">
-                        <div class="category-icon"><i class="fas fa-graduation-cap"></i></div>
-                        <h3>Proyectos Educativos</h3>
-                        <p>Aprendizaje y enseñanza interactiva</p>
-                    </div>
-                    <div class="category-btn" data-category="tech">
-                        <div class="category-icon"><i class="fas fa-microchip"></i></div>
-                        <h3>Tech & Electrónicos</h3>
-                        <p>Integración con tecnología</p>
-                    </div>
-                </div>
-
-                <button class="random-btn" onclick="generateRandomIdeas()">
-                    <i class="fas fa-random"></i> Mezcla Aleatoria de Todo
-                </button>
-
-                <div class="ideas-container" id="ideasContainer">
-                    <div style="text-align: center; color: #666;">
-                        <i class="fas fa-arrow-up" style="font-size: 2rem; margin-bottom: 1rem;"></i>
-                        <p>Selecciona una categoría arriba para generar ideas creativas</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="recursos" class="container">
-            <div class="resources">
-                <h2 class="section-title">📦 Recursos Gratuitos</h2>
-                <p class="section-subtitle">Descargas directas de proyectos print-in-place</p>
-                
-                <div class="resources-grid">
-                    <div class="resource-card">
-                        <div class="resource-icon"><i class="fas fa-dragon"></i></div>
-                        <h3>Dragones Articulados</h3>
-                        <p>Los famosos dragones flexi con múltiples articulaciones móviles</p>
-                        <a href="https://www.thingiverse.com/thing:6446798" class="download-link" target="_blank">
-                            <i class="fas fa-download"></i> Descargar STL
-                        </a>
-                    </div>
-                    <div class="resource-card">
-                        <div class="resource-icon"><i class="fas fa-link"></i></div>
-                        <h3>Cadenas Print-in-Place</h3>
-                        <p>Cadenas funcionales que se imprimen ya ensambladas</p>
-                        <a href="https://www.thingiverse.com/thing:451773" class="download-link" target="_blank">
-                            <i class="fas fa-download"></i> Descargar STL
-                        </a>
-                    </div>
-                    <div class="resource-card">
-                        <div class="resource-icon"><i class="fas fa-cog"></i></div>
-                        <h3>Engranajes Planetarios</h3>
-                        <p>Sistemas de engranajes complejos que funcionan perfectamente</p>
-                        <a href="https://www.printables.com/model/190200-sprocketsgears-for-print-in-place-gear-chain-fisch" class="download-link" target="_blank">
-                            <i class="fas fa-download"></i> Descargar STL
-                        </a>
-                    </div>
-                    <div class="resource-card">
-                        <div class="resource-icon"><i class="fas fa-search"></i></div>
-                        <h3>Explorar Más</h3>
-                        <p>Miles de modelos gratuitos en las mejores plataformas</p>
-                        <a href="https://www.thingiverse.com/tag:print_in_place" class="download-link" target="_blank">
-                            <i class="fas fa-external-link-alt"></i> Ver Thingiverse
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer id="contacto">
-        <div class="container">
-            <p>&copy; 2025 Ideas 3D - Inspiración para Makers. Hecho con ❤️ para la comunidad 3D</p>
-            <p style="margin-top: 0.5rem; opacity: 0.8;">
-                <i class="fas fa-envelope"></i> contacto@ideas3d.com | 
-                <i class="fab fa-github"></i> GitHub | 
-                <i class="fab fa-instagram"></i> Instagram
-            </p>
+    <div class="container">
+        <div class="logo">PRINTAPLAB<br>3D STORE</div>
+        <h1 class="title">Printaplab 3D Store</h1>
+        <p class="subtitle">Síguenos en nuestras redes sociales</p>
+        
+        <div class="social-links">
+            <a href="https://www.ciciai.com/bot/ucrGrdZW" target="_blank" class="social-link ciciai">
+                <svg class="social-icon" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+                Ciciai Bot
+            </a>
+            
+            <a href="https://cults3d.com/es/usuarios/printaplab3d/modelos-3d" target="_blank" class="social-link cults3d">
+                <svg class="social-icon" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M21 8V7l-3 2-3-2v1c0 1.1-.9 2-2 2s-2-.9-2-2V7L8 9l3 2v1c0 1.1.9 2 2 2s2-.9 2-2v-1l3 2 3-2v-1z"/>
+                </svg>
+                Modelos 3D
+            </a>
+            
+            <a href="https://www.tiktok.com/@printaplab3dstore" target="_blank" class="social-link tiktok">
+                <svg class="social-icon" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19.321 5.562a5.122 5.122 0 0 1-.443-.258 6.228 6.228 0 0 1-1.137-.966c-.849-1.011-1.149-2.291-1.149-2.291H13.53v11.928c0 2.404-1.798 4.352-4.013 4.352-2.215 0-4.013-1.948-4.013-4.352 0-2.404 1.798-4.352 4.013-4.352.22 0 .434.018.642.05V6.645c-.208-.027-.418-.04-.642-.04C4.486 6.605 0 11.091 0 16.622s4.486 10.017 9.517 10.017 9.517-4.486 9.517-10.017V9.468a10.94 10.94 0 0 0 6.348 2.018v-3.062c-1.694 0-3.24-.54-4.514-1.456l.453-.406z"/>
+                </svg>
+                TikTok
+            </a>
+            
+            <a href="https://www.instagram.com/printaplab3dstore" target="_blank" class="social-link instagram">
+                <svg class="social-icon" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+                Instagram
+            </a>
         </div>
-    </footer>
-
-    <script>
-        const categories = {
-            printinplace: [
-                'Dragón articulado con 20+ articulaciones móviles',
-                'Caja con cerradura de combinación funcional',
-                'Engranajes planetarios que giran perfectamente',
-                'Cadena infinita impresa de una sola vez',
-                'Bisagra living hinge ultra-flexible',
-                'Resorte compresible dentro de una carcasa',
-                'Tanque desplegable que se abre 3x su tamaño',
-                'Esfera dentro de jaula sin soportes'
-            ],
-            productos: [
-                'Herramientas modulares personalizables para makers',
-                'Juguetes educativos con mecanismos imprimibles',
-                'Accesorios wearables con electrónicos integrados',
-                'Sistemas de organización modular para talleres',
-                'Prótesis de bajo costo personalizables',
-                'Instrumentos musicales experimentales',
-                'Gadgets domésticos con funciones únicas',
-                'Componentes para robots DIY modulares'
-            ],
-            artistico: [
-                'Esculturas cinéticas con engranajes impresos',
-                'Instalaciones interactivas con sensores',
-                'Arte generativo que cambia con el tiempo',
-                'Esculturas modulares colaborativas',
-                'Joyería paramétrica personalizada',
-                'Estructuras arquitectónicas a escala',
-                'Arte fractal en 3D multi-material',
-                'Esculturas que incorporan luz y movimiento'
-            ],
-            funcional: [
-                'Sistema de cultivo hidropónico modular',
-                'Organizadores adaptativos para diferentes espacios',
-                'Herramientas de cocina con ergonomía mejorada',
-                'Accesorios para bicicletas personalizados',
-                'Soluciones de almacenamiento inteligente',
-                'Dispositivos de asistencia para discapacidades',
-                'Muebles plegables ultra-compactos',
-                'Sistemas de ventilación para impresoras 3D'
-            ],
-            educativo: [
-                'Modelos anatómicos interactivos desmontables',
-                'Rompecabezas mecánicos para enseñar ingeniería',
-                'Kits de ciencia con experimentos impresos',
-                'Modelos planetarios con movimiento real',
-                'Herramientas de matemáticas táctiles',
-                'Simuladores de ecosistemas en miniatura',
-                'Juegos de mesa educativos personalizables',
-                'Laboratorios portátiles para química básica'
-            ],
-            tech: [
-                'Carcasas personalizadas para microcontroladores',
-                'Soportes ajustables para cámaras y sensores',
-                'Chasis para drones experimentales',
-                'Cajas para proyectos IoT con ventilación',
-                'Conectores y adaptadores únicos',
-                'Prototipos rápidos para PCBs',
-                'Estructuras para displays LED flexibles',
-                'Mecanismos de precisión para robótica'
-            ]
-        };
-
-        let currentCategory = '';
-
-        document.querySelectorAll('.category-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                generateIdeas(this.dataset.category);
-            });
-        });
-
-        function generateIdeas(category) {
-            currentCategory = category;
-            const container = document.getElementById('ideasContainer');
-            container.innerHTML = `
-                <div class="loading">
-                    <div class="spinner"></div>
-                    <p style="margin-top: 1rem;">Generando ideas creativas...</p>
-                </div>
-            `;
-            setTimeout(() => {
-                const shuffled = [...categories[category]].sort(() => 0.5 - Math.random());
-                displayIdeas(shuffled.slice(0, 4));
-            }, 800);
-        }
-
-        function generateRandomIdeas() {
-            const container = document.getElementById('ideasContainer');
-            document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
-            container.innerHTML = `
-                <div class="loading">
-                    <div class="spinner"></div>
-                    <p style="margin-top: 1rem;">Generando mezcla aleatoria...</p>
-                </div>
-            `;
-            setTimeout(() => {
-                const allIdeas = Object.values(categories).flat();
-                const shuffled = [...allIdeas].sort(() => 0.5 - Math.random());
-                displayIdeas(shuffled.slice(0, 6));
-            }, 800);
-        }
-
-        function displayIdeas(ideas) {
-            const container = document.getElementById('ideasContainer');
-            container.innerHTML = ideas.map(idea => `
-                <div class="idea-item">${idea}</div>
-            `).join('');
-        }
-    </script>
+        
+        <div class="footer">
+            ✨ Impresión 3D de calidad ✨
+        </div>
+    </div>
 </body>
 </html>
