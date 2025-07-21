@@ -157,7 +157,7 @@
             box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
         }
 
-        .calculator-container button {
+        button {
             background-color: #007bff; /* Azul brillante para el botón */
             color: white;
             padding: 12px 25px;
@@ -169,7 +169,7 @@
             margin-top: 20px;
         }
 
-        .calculator-container button:hover {
+        button:hover {
             background-color: #0056b3; /* Un azul más oscuro al pasar el ratón */
         }
 
@@ -289,6 +289,16 @@
         </div>
 
         <div class="input-group">
+            <label for="laborCostPerHour">Costo Mano de Obra (ARS/hora):</label>
+            <input type="number" id="laborCostPerHour" value="1500" step="0.01">
+        </div>
+
+        <div class="input-group">
+            <label for="extraMaterialsCost">Costos Materiales Extra (ARS):</label>
+            <input type="number" id="extraMaterialsCost" value="0" step="0.01">
+        </div>
+
+        <div class="input-group">
             <label for="markup">Margen de Ganancia (%):</label>
             <input type="number" id="markup" value="50" step="1">
         </div>
@@ -307,17 +317,23 @@
 
     <script>
         function calculateCost() {
-            // Obtener los valores de los inputs
+            // Obtener los valores de los inputs existentes
             const materialCostPerKg = parseFloat(document.getElementById('materialCost').value);
             const weightGrams = parseFloat(document.getElementById('weight').value);
             const printTimeHours = parseFloat(document.getElementById('printTime').value);
             const powerCostPerKwh = parseFloat(document.getElementById('powerCost').value);
             const powerConsumptionWatts = parseFloat(document.getElementById('powerConsumption').value);
+            
+            // Obtener los nuevos valores para mano de obra y materiales extra
+            const laborCostPerHour = parseFloat(document.getElementById('laborCostPerHour').value);
+            const extraMaterialsCost = parseFloat(document.getElementById('extraMaterialsCost').value);
+
             const markupPercentage = parseFloat(document.getElementById('markup').value);
 
             // Validar que los inputs sean números válidos
             if (isNaN(materialCostPerKg) || isNaN(weightGrams) || isNaN(printTimeHours) || 
-                isNaN(powerCostPerKwh) || isNaN(powerConsumptionWatts) || isNaN(markupPercentage)) {
+                isNaN(powerCostPerKwh) || isNaN(powerConsumptionWatts) || 
+                isNaN(laborCostPerHour) || isNaN(extraMaterialsCost) || isNaN(markupPercentage)) {
                 document.getElementById('totalCost').textContent = "Por favor, ingresa valores válidos.";
                 document.getElementById('totalCost').style.color = "red"; // Cambiar color a rojo para errores
                 return;
@@ -330,8 +346,11 @@
             const powerConsumptionKw = powerConsumptionWatts / 1000; // Convertir watts a kilowatts
             const energyCost = powerConsumptionKw * printTimeHours * powerCostPerKwh;
 
-            // Costo base (material + energía)
-            const baseCost = materialCost + energyCost;
+            // Cálculo del costo de mano de obra
+            const laborCost = printTimeHours * laborCostPerHour;
+
+            // Costo base (material + energía + mano de obra + materiales extra)
+            const baseCost = materialCost + energyCost + laborCost + extraMaterialsCost;
 
             // Calcular el margen de ganancia
             const profit = baseCost * (markupPercentage / 100);
