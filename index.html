@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PRINTAPLAB 3D STORE</title>
     <style>
-        /* --- Estilos base con colores más vistosos --- */
+        /* --- Estilos base con colores vistosos y animaciones --- */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #222; /* Fondo ligeramente más claro pero aún oscuro */
@@ -61,8 +61,14 @@
             text-decoration: none;
             font-weight: bold;
             font-size: 1.2em;
+            /* Transiciones para las animaciones del link */
             transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px); /* Se eleva ligeramente */
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4); /* Sombra más pronunciada */
         }
 
         .social-link.ciciai {
@@ -71,8 +77,6 @@
         }
         .social-link.ciciai:hover {
             background-color: #45a049;
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
         }
 
         .social-link.cults3d {
@@ -81,8 +85,6 @@
         }
         .social-link.cults3d:hover {
             background-color: #f57c00;
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
         }
 
         .social-link.tiktok {
@@ -91,23 +93,22 @@
         }
         .social-link.tiktok:hover {
             background-color: #c2185b;
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
         }
 
         .social-link.instagram {
             background: linear-gradient(45deg, #f44336 0%, #e91e63 25%, #9c27b0 50%, #3f51b5 75%, #2196f3 100%); /* Degradado de Instagram más moderno */
             color: white;
         }
-        .social-link.instagram:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-        }
 
         .social-icon {
             width: 28px;
             height: 28px;
             margin-right: 10px;
+            transition: transform 0.3s ease; /* Transición para el icono */
+        }
+
+        .social-link:hover .social-icon {
+            transform: scale(1.1); /* Icono se agranda ligeramente */
         }
 
         .footer {
@@ -121,7 +122,7 @@
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
         }
 
-        /* --- Estilos para la calculadora con colores y diseño --- */
+        /* --- Estilos para la calculadora con colores, diseño y animaciones --- */
         .calculator-container {
             background-color: #333; /* Fondo oscuro para la calculadora */
             padding: 40px;
@@ -132,6 +133,18 @@
             text-align: center;
             margin-bottom: 50px;
             border: 1px solid #555;
+            animation: fadeIn 1s ease-out; /* Animación de entrada de la calculadora */
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .calculator-container h1 {
@@ -185,6 +198,7 @@
             border-radius: 8px;
             font-size: 1.2em;
             cursor: pointer;
+            /* Transiciones para las animaciones del botón */
             transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
             margin-top: 30px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
@@ -192,8 +206,8 @@
 
         button:hover {
             background-color: #008ba7; /* Cian más oscuro al pasar el ratón */
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            transform: scale(1.05); /* Ligeramente más grande al pasar el ratón */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
         }
 
         .result {
@@ -203,6 +217,15 @@
             border-radius: 8px;
             border: 1px solid #777;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            opacity: 0; /* Inicialmente oculto */
+            transform: translateY(10px); /* Ligeramente desplazado */
+            /* Transición para la aparición del resultado */
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .result.show {
+            opacity: 1; /* Se hace visible */
+            transform: translateY(0); /* Vuelve a su posición original */
         }
 
         .result h2 {
@@ -404,6 +427,10 @@
                 isNaN(laborCostPerHour) || isNaN(extraMaterialsCost) || isNaN(markupPercentage)) {
                 document.getElementById('totalCost').textContent = "Por favor, ingresa valores válidos.";
                 document.getElementById('totalCost').style.color = "red"; // Cambiar color a rojo para errores
+                
+                // Si hay un error, ocultar el resultado o quitar la clase 'show'
+                const resultDiv = document.querySelector('.result');
+                resultDiv.classList.remove('show');
                 return;
             }
 
@@ -429,6 +456,10 @@
             // Mostrar el resultado con el símbolo de pesos argentinos
             document.getElementById('totalCost').textContent = `$${totalCost.toFixed(2)}`;
             document.getElementById('totalCost').style.color = "#aeea00"; // Usar el verde lima brillante para el costo
+
+            // Mostrar el resultado con animación
+            const resultDiv = document.querySelector('.result');
+            resultDiv.classList.add('show');
         }
     </script>
 </body>
