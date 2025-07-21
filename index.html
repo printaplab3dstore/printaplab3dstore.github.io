@@ -1,129 +1,148 @@
-<!DOCTYPE html><html lang="es">
+<!DOCTYPE html>
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ideas 3D</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: #333;
-            color: white;
-            padding: 1rem;
-            text-align: center;
-        }
-        nav {
-            background-color: #444;
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            padding: 0.5rem;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-        }
-        section {
-            padding: 2rem;
-        }
-        .calculadora {
-            max-width: 400px;
-            margin: auto;
-            background: #f4f4f4;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        .calculadora input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-        }
-        .resultado {
-            background: #e0e0e0;
-            padding: 10px;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ideas 3D - Printaplab</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    nav {
+      background-color: #222;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-around;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+    }
+    nav a:hover {
+      background-color: #444;
+    }
+    section {
+      padding: 2rem;
+      display: none;
+    }
+    section.active {
+      display: block;
+    }
+    h1 {
+      text-align: center;
+    }
+    .calculadora {
+      max-width: 500px;
+      margin: auto;
+      background: #f3f3f3;
+      padding: 20px;
+      border-radius: 8px;
+    }
+    .calculadora input {
+      width: 100%;
+      margin-bottom: 1rem;
+      padding: 10px;
+      font-size: 1rem;
+    }
+    .calculadora button {
+      width: 100%;
+      padding: 10px;
+      background-color: #222;
+      color: white;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    .calculadora button:hover {
+      background-color: #444;
+    }
+    .resultado {
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Ideas 3D</h1>
-    </header>
-    <nav>
-        <a href="#inicio">Inicio</a>
-        <a href="#proyectos">Proyectos</a>
-        <a href="#recursos">Recursos</a>
-        <a href="#calculadora">Calculadora FDM</a>
-    </nav><section id="inicio">
-    <h2>Bienvenido a Ideas 3D</h2>
-    <p>Inspiración y recursos para tus impresiones FDM.</p>
-</section>
+  <nav>
+    <a href="#" onclick="mostrarSeccion('inicio')">Inicio</a>
+    <a href="#" onclick="mostrarSeccion('categorias')">Categorías</a>
+    <a href="#" onclick="mostrarSeccion('recursos')">Recursos</a>
+    <a href="#" onclick="mostrarSeccion('calculadora')">Calculadora FDM</a>
+    <a href="#" onclick="mostrarSeccion('contacto')">Contacto</a>
+  </nav>
 
-<section id="proyectos">
-    <h2>Proyectos Destacados</h2>
-    <p>Explorá ideas útiles y creativas para imprimir en tu FDM.</p>
-</section>
+  <section id="inicio" class="active">
+    <h1>Bienvenido a Ideas 3D</h1>
+    <p>Explorá ideas creativas para imprimir en FDM. Inspirate y creá.</p>
+  </section>
 
-<section id="recursos">
-    <h2>Recursos Gratuitos</h2>
-    <p>Links a STL, configuraciones y más.</p>
-</section>
+  <section id="categorias">
+    <h1>Categorías</h1>
+    <ul>
+      <li>Organizadores</li>
+      <li>Decoración</li>
+      <li>Utilitarios</li>
+      <li>Regalos</li>
+    </ul>
+  </section>
 
-<section id="calculadora">
-    <h2>Calculadora FDM</h2>
+  <section id="recursos">
+    <h1>Recursos gratuitos</h1>
+    <p>Enlaces a STL, configuraciones Cura, y más.</p>
+  </section>
+
+  <section id="calculadora">
+    <h1>Calculadora FDM</h1>
     <div class="calculadora">
-        <label>Precio del filamento (por kg en ARS):</label>
-        <input type="number" id="precioKg" placeholder="Ej: 5000">
+      <label>💰 Precio del filamento (por kg en ARS):</label>
+      <input type="number" id="precioFilamento" placeholder="Ej: 5000" />
+      
+      <label>⚖️ Peso de la pieza (en gramos):</label>
+      <input type="number" id="pesoPieza" placeholder="Ej: 50" />
+      
+      <label>⏱️ Tiempo de impresión (en horas):</label>
+      <input type="number" id="tiempoImpresion" placeholder="Ej: 3.5" />
+      
+      <label>🕒 Costo por hora de impresión (ARS):</label>
+      <input type="number" id="costoHora" placeholder="Ej: 200" />
 
-        <label>Peso de la pieza (en gramos):</label>
-        <input type="number" id="pesoPieza" placeholder="Ej: 75">
-
-        <label>Tiempo de impresión (en horas):</label>
-        <input type="number" id="tiempo" placeholder="Ej: 3.5">
-
-        <label>Costo por hora de impresión (en ARS):</label>
-        <input type="number" id="costoHora" placeholder="Ej: 250">
-
-        <label>Ganancia deseada (%):</label>
-        <input type="number" id="ganancia" placeholder="Ej: 30">
-
-        <button onclick="calcularCosto()">Calcular</button>
-
-        <div class="resultado" id="resultado"></div>
+      <button onclick="calcularCosto()">Calcular precio sugerido</button>
+      <div class="resultado" id="resultado"></div>
     </div>
-</section>
+  </section>
 
-<script>
-    function calcularCosto() {
-        const precioKg = parseFloat(document.getElementById('precioKg').value);
-        const pesoPieza = parseFloat(document.getElementById('pesoPieza').value);
-        const tiempo = parseFloat(document.getElementById('tiempo').value);
-        const costoHora = parseFloat(document.getElementById('costoHora').value);
-        const ganancia = parseFloat(document.getElementById('ganancia').value);
+  <section id="contacto">
+    <h1>Contacto</h1>
+    <p>Seguinos en redes o escribinos a printaplab3d@gmail.com</p>
+  </section>
 
-        if (isNaN(precioKg) || isNaN(pesoPieza) || isNaN(tiempo) || isNaN(costoHora)) {
-            document.getElementById('resultado').innerText = 'Por favor, completá todos los campos obligatorios.';
-            return;
-        }
-
-        const costoFilamento = (precioKg / 1000) * pesoPieza;
-        const costoTiempo = tiempo * costoHora;
-        const costoTotal = costoFilamento + costoTiempo;
-        const precioFinal = costoTotal * (1 + (ganancia || 0) / 100);
-
-        document.getElementById('resultado').innerHTML = `
-            <strong>Costo del filamento:</strong> $${costoFilamento.toFixed(2)}<br>
-            <strong>Costo por tiempo:</strong> $${costoTiempo.toFixed(2)}<br>
-            <strong>Total sin ganancia:</strong> $${costoTotal.toFixed(2)}<br>
-            <strong>Precio final con ganancia:</strong> <span style="font-size:1.2em;color:green;">$${precioFinal.toFixed(2)}</span>
-        `;
+  <script>
+    function mostrarSeccion(id) {
+      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
     }
-</script>
 
+    function calcularCosto() {
+      const precioFilamento = parseFloat(document.getElementById('precioFilamento').value);
+      const pesoPieza = parseFloat(document.getElementById('pesoPieza').value);
+      const tiempo = parseFloat(document.getElementById('tiempoImpresion').value);
+      const costoHora = parseFloat(document.getElementById('costoHora').value);
+
+      if (isNaN(precioFilamento) || isNaN(pesoPieza) || isNaN(tiempo) || isNaN(costoHora)) {
+        document.getElementById('resultado').innerText = "Por favor, completá todos los campos.";
+        return;
+      }
+
+      const costoMaterial = (precioFilamento / 1000) * pesoPieza;
+      const costoTiempo = tiempo * costoHora;
+      const total = costoMaterial + costoTiempo;
+
+      document.getElementById('resultado').innerText = `💸 Precio sugerido de venta: $${total.toFixed(2)} ARS`;
+    }
+  </script>
 </body>
 </html>
