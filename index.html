@@ -264,8 +264,8 @@
         <h1>Calculadora de Costos de Impresión FDM</h1>
 
         <div class="input-group">
-            <label for="materialCost">Costo del Filamento (€/kg):</label>
-            <input type="number" id="materialCost" value="20" step="0.01">
+            <label for="materialCost">Costo del Filamento (ARS/kg):</label>
+            <input type="number" id="materialCost" value="25000" step="0.01">
         </div>
 
         <div class="input-group">
@@ -279,8 +279,8 @@
         </div>
 
         <div class="input-group">
-            <label for="powerCost">Costo de Energía (€/kWh):</label>
-            <input type="number" id="powerCost" value="0.20" step="0.001">
+            <label for="powerCost">Costo de Energía (ARS/kWh):</label>
+            <input type="number" id="powerCost" value="80" step="0.001">
         </div>
 
         <div class="input-group">
@@ -297,7 +297,7 @@
 
         <div class="result">
             <h2>Costo Total Estimado:</h2>
-            <p id="totalCost">€0.00</p>
+            <p id="totalCost">$0.00</p>
         </div>
     </div>
 
@@ -339,8 +339,8 @@
             // Costo total
             const totalCost = baseCost + profit;
 
-            // Mostrar el resultado
-            document.getElementById('totalCost').textContent = `€${totalCost.toFixed(2)}`;
+            // Mostrar el resultado con el símbolo de pesos argentinos
+            document.getElementById('totalCost').textContent = `$${totalCost.toFixed(2)}`;
             document.getElementById('totalCost').style.color = "#4CAF50"; // Volver al color verde si el cálculo es exitoso
         }
     </script>
