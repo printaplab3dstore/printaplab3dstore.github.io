@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PRINTAPLAB 3D STORE</title>
     <style>
-        /* --- Estilos base con colores vistosos y animaciones --- */
+        /* --- Estilos base con colores más vistosos --- */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #222; /* Fondo ligeramente más claro pero aún oscuro */
@@ -65,17 +65,14 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
 
-        .social-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
-        }
-
         .social-link.ciciai {
             background-color: #4CAF50; /* Verde más vivo */
             color: white;
         }
         .social-link.ciciai:hover {
             background-color: #45a049;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
         }
 
         .social-link.cults3d {
@@ -84,6 +81,8 @@
         }
         .social-link.cults3d:hover {
             background-color: #f57c00;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
         }
 
         .social-link.tiktok {
@@ -92,22 +91,23 @@
         }
         .social-link.tiktok:hover {
             background-color: #c2185b;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
         }
 
         .social-link.instagram {
             background: linear-gradient(45deg, #f44336 0%, #e91e63 25%, #9c27b0 50%, #3f51b5 75%, #2196f3 100%); /* Degradado de Instagram más moderno */
             color: white;
         }
+        .social-link.instagram:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        }
 
         .social-icon {
             width: 28px;
             height: 28px;
             margin-right: 10px;
-            transition: transform 0.3s ease;
-        }
-
-        .social-link:hover .social-icon {
-            transform: scale(1.1);
         }
 
         .footer {
@@ -121,7 +121,7 @@
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
         }
 
-        /* --- Estilos para la calculadora con colores, diseño y animaciones --- */
+        /* --- Estilos para la calculadora con colores y diseño --- */
         .calculator-container {
             background-color: #333; /* Fondo oscuro para la calculadora */
             padding: 40px;
@@ -132,18 +132,6 @@
             text-align: center;
             margin-bottom: 50px;
             border: 1px solid #555;
-            animation: fadeIn 1s ease-out; /* Animación al cargar */
-        }
-
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .calculator-container h1 {
@@ -204,8 +192,8 @@
 
         button:hover {
             background-color: #008ba7; /* Cian más oscuro al pasar el ratón */
-            transform: scale(1.05); /* Ligeramente más grande al pasar el ratón */
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
         }
 
         .result {
@@ -215,14 +203,6 @@
             border-radius: 8px;
             border: 1px solid #777;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-            opacity: 0; /* Inicialmente oculto */
-            transform: translateY(10px); /* Ligeramente desplazado */
-            transition: opacity 0.5s ease, transform 0.5s ease; /* Transición para mostrarlo */
-        }
-
-        .result.show {
-            opacity: 1; /* Se hace visible */
-            transform: translateY(0); /* Vuelve a su posición original */
         }
 
         .result h2 {
@@ -275,4 +255,181 @@
 
             .calculator-container {
                 padding: 30px;
-                margin
+                margin-bottom: 40px;
+            }
+
+            .calculator-container h1 {
+                font-size: 2.2em;
+                margin-bottom: 20px;
+            }
+
+            .input-group {
+                margin-bottom: 15px;
+            }
+
+            button {
+                font-size: 1.1em;
+                padding: 12px 25px;
+                margin-top: 25px;
+            }
+
+            .result {
+                margin-top: 30px;
+                padding: 15px;
+            }
+
+            .result h2 {
+                font-size: 1.6em;
+                margin-bottom: 10px;
+            }
+
+            .result p {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1 class="main-title">PRINTAPLAB</h1>
+        <h2 class="sub-title">3D STORE</h2>
+        <p class="brand-slogan">Printaplab 3D Store</p>
+        <p class="social-text">Síguenos en nuestras redes sociales</p>
+    </header>
+
+    <div class="social-links">
+        <a href="https://www.ciciai.com/bot/ucrGrdZW" target="_blank" class="social-link ciciai">
+            <svg class="social-icon" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            </svg>
+            Ciciai Bot
+        </a>
+
+        <a href="https://cults3d.com/es/usuarios/printaplab3d/modelos-3d" target="_blank" class="social-link cults3d">
+            <svg class="social-icon" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M21 8V7l-3 2-3-2v1c0 1.1-.9 2-2 2s-2-.9-2-2V7L8 9l3 2v1c0 1.1.9 2 2 2s2-.9 2-2v-1l3 2 3-2v-1z"/>
+            </svg>
+            Modelos 3D
+        </a>
+
+        <a href="https://www.tiktok.com/@printaplab3dstore" target="_blank" class="social-link tiktok">
+            <svg class="social-icon" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19.321 5.562a5.122 5.122 0 0 1-.443-.258 6.228 6.228 0 0 1-1.137-.966c-.849-1.011-1.149-2.291-1.149-2.291H13.53v11.928c0 2.404-1.798 4.352-4.013 4.352-2.215 0-4.013-1.948-4.013-4.352 0-2.404 1.798-4.352 4.013-4.352.22 0 .434.018.642.05V6.645c-.208-.027-.418-.04-.642-.04C4.486 6.605 0 11.091 0 16.622s4.486 10.017 9.517 10.017 9.517-4.486 9.517-10.017V9.468a10.94 10.94 0 0 0 6.348 2.018v-3.062c-1.694 0-3.24-.54-4.514-1.456l.453-.406z"/>
+            </svg>
+            TikTok
+        </a>
+
+        <a href="https://www.instagram.com/printaplab3dstore" target="_blank" class="social-link instagram">
+            <svg class="social-icon" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+            Instagram
+        </a>
+    </div>
+
+    <div class="calculator-container">
+        <h1>Calculadora de Costos de Impresión FDM</h1>
+
+        <div class="input-group">
+            <label for="materialCost">Costo del Filamento (ARS/kg):</label>
+            <input type="number" id="materialCost" value="25000" step="0.01">
+        </div>
+
+        <div class="input-group">
+            <label for="weight">Peso de la Pieza (gramos):</label>
+            <input type="number" id="weight" value="10" step="0.01">
+        </div>
+
+        <div class="input-group">
+            <label for="printTime">Tiempo de Impresión (horas):</label>
+            <input type="number" id="printTime" value="1" step="0.01">
+        </div>
+
+        <div class="input-group">
+            <label for="powerCost">Costo de Energía (ARS/kWh):</label>
+            <input type="number" id="powerCost" value="80" step="0.001">
+        </div>
+
+        <div class="input-group">
+            <label for="powerConsumption">Consumo de Impresora (watts):</label>
+            <input type="number" id="powerConsumption" value="100" step="1">
+        </div>
+
+        <div class="input-group">
+            <label for="laborCostPerHour">Costo Mano de Obra (ARS/hora):</label>
+            <input type="number" id="laborCostPerHour" value="1500" step="0.01">
+        </div>
+
+        <div class="input-group">
+            <label for="extraMaterialsCost">Costos Materiales Extra (ARS):</label>
+            <input type="number" id="extraMaterialsCost" value="0" step="0.01">
+        </div>
+
+        <div class="input-group">
+            <label for="markup">Margen de Ganancia (%):</label>
+            <input type="number" id="markup" value="50" step="1">
+        </div>
+
+        <button onclick="calculateCost()">Calcular Costo</button>
+
+        <div class="result">
+            <h2>Costo Total Estimado:</h2>
+            <p id="totalCost">$0.00</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        ✨ Impresión 3D de calidad ✨
+    </div>
+
+    <script>
+        function calculateCost() {
+            // Obtener los valores de los inputs existentes
+            const materialCostPerKg = parseFloat(document.getElementById('materialCost').value);
+            const weightGrams = parseFloat(document.getElementById('weight').value);
+            const printTimeHours = parseFloat(document.getElementById('printTime').value);
+            const powerCostPerKwh = parseFloat(document.getElementById('powerCost').value);
+            const powerConsumptionWatts = parseFloat(document.getElementById('powerConsumption').value);
+
+            // Obtener los nuevos valores para mano de obra y materiales extra
+            const laborCostPerHour = parseFloat(document.getElementById('laborCostPerHour').value);
+            const extraMaterialsCost = parseFloat(document.getElementById('extraMaterialsCost').value);
+
+            const markupPercentage = parseFloat(document.getElementById('markup').value);
+
+            // Validar que los inputs sean números válidos
+            if (isNaN(materialCostPerKg) || isNaN(weightGrams) || isNaN(printTimeHours) ||
+                isNaN(powerCostPerKwh) || isNaN(powerConsumptionWatts) ||
+                isNaN(laborCostPerHour) || isNaN(extraMaterialsCost) || isNaN(markupPercentage)) {
+                document.getElementById('totalCost').textContent = "Por favor, ingresa valores válidos.";
+                document.getElementById('totalCost').style.color = "red"; // Cambiar color a rojo para errores
+                return;
+            }
+
+            // Cálculo del costo de material
+            const materialCost = (materialCostPerKg / 1000) * weightGrams; // Convertir kg a gramos
+
+            // Cálculo del costo de energía
+            const powerConsumptionKw = powerConsumptionWatts / 1000; // Convertir watts a kilowatts
+            const energyCost = powerConsumptionKw * printTimeHours * powerCostPerKwh;
+
+            // Cálculo del costo de mano de obra
+            const laborCost = printTimeHours * laborCostPerHour;
+
+            // Costo base (material + energía + mano de obra + materiales extra)
+            const baseCost = materialCost + energyCost + laborCost + extraMaterialsCost;
+
+            // Calcular el margen de ganancia
+            const profit = baseCost * (markupPercentage / 100);
+
+            // Costo total
+            const totalCost = baseCost + profit;
+
+            // Mostrar el resultado con el símbolo de pesos argentinos
+            document.getElementById('totalCost').textContent = `$${totalCost.toFixed(2)}`;
+            document.getElementById('totalCost').style.color = "#aeea00"; // Usar el verde lima brillante para el costo
+        }
+    </script>
+</body>
+</html>
