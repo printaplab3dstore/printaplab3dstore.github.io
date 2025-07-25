@@ -5,462 +5,576 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PRINTAPLAB 3D STORE</title>
     <style>
-        /* --- Estilos base con colores vistosos y animaciones --- */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #222; /* Fondo ligeramente más claro pero aún oscuro */
-            color: #eee; /* Texto claro general */
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700&display=swap');
+
+        * {
             margin: 0;
-            padding: 30px;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Animated background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(45deg, #0a0a0a, #1a1a2e, #16213e, #0f3460);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            25% { background-position: 100% 50%; }
+            50% { background-position: 100% 100%; }
+            75% { background-position: 0% 100%; }
+        }
+
+        /* Floating particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(0, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: float 6s infinite linear;
+        }
+
+        .particle:nth-child(2n) { background: rgba(255, 0, 150, 0.6); animation-duration: 8s; }
+        .particle:nth-child(3n) { background: rgba(255, 255, 0, 0.6); animation-duration: 10s; }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: 100vh;
-            background-image: linear-gradient(45deg, #222 0%, #333 100%); /* Un sutil degradado */
+            position: relative;
+            z-index: 1;
         }
 
+        /* Header styles */
         header {
             text-align: center;
-            margin-bottom: 40px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .logo-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
         }
 
         .main-title {
-            color: #ffcc00; /* Amarillo dorado llamativo */
-            font-size: 3.5em;
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            background: linear-gradient(45deg, #00ffff, #ff0080, #ffff00, #00ff80);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: textGlow 3s ease-in-out infinite, gradientShift 6s ease infinite;
             margin-bottom: 10px;
+            text-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+            position: relative;
+        }
+
+        .main-title::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes textGlow {
+            0%, 100% { filter: brightness(1) drop-shadow(0 0 20px rgba(0, 255, 255, 0.5)); }
+            50% { filter: brightness(1.2) drop-shadow(0 0 40px rgba(255, 0, 150, 0.8)); }
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
 
         .sub-title {
-            color: #f2f2f2;
-            font-size: 1.8em;
-            margin-top: 0;
-            font-style: italic;
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: #ffffff;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0;
+            animation: fadeSlideUp 1s ease-out 0.5s forwards;
+            margin-bottom: 30px;
         }
 
-        .brand-slogan, .social-text {
-            color: #bbb;
-            margin-top: 15px;
-            font-size: 1.1em;
+        .brand-slogan {
+            font-size: 1.1rem;
+            color: #aaa;
+            opacity: 0;
+            animation: fadeSlideUp 1s ease-out 1s forwards;
+            margin-bottom: 10px;
         }
 
-        .social-links {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 25px;
-            margin-bottom: 50px;
-            max-width: 900px;
-        }
-
-        .social-link {
-            display: flex;
-            align-items: center;
-            padding: 12px 20px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.2em;
-            /* Transiciones para las animaciones del link */
-            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-        }
-
-        .social-link:hover {
-            transform: translateY(-3px); /* Se eleva ligeramente */
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4); /* Sombra más pronunciada */
-        }
-
-        .social-link.ciciai {
-            background-color: #4CAF50; /* Verde más vivo */
-            color: white;
-        }
-        .social-link.ciciai:hover {
-            background-color: #45a049;
-        }
-
-        .social-link.cults3d {
-            background-color: #ff9800; /* Naranja más brillante */
-            color: white;
-        }
-        .social-link.cults3d:hover {
-            background-color: #f57c00;
-        }
-
-        .social-link.tiktok {
-            background-color: #e91e63; /* Rosa más intenso */
-            color: white;
-        }
-        .social-link.tiktok:hover {
-            background-color: #c2185b;
-        }
-
-        .social-link.instagram {
-            background: linear-gradient(45deg, #f44336 0%, #e91e63 25%, #9c27b0 50%, #3f51b5 75%, #2196f3 100%); /* Degradado de Instagram más moderno */
-            color: white;
-        }
-
-        .social-icon {
-            width: 28px;
-            height: 28px;
-            margin-right: 10px;
-            transition: transform 0.3s ease; /* Transición para el icono */
-        }
-
-        .social-link:hover .social-icon {
-            transform: scale(1.1); /* Icono se agranda ligeramente */
-        }
-
-        .footer {
-            margin-top: 60px;
+        .social-text {
+            font-size: 1rem;
             color: #888;
-            font-size: 1em;
-            text-align: center;
-            padding-top: 25px;
-            border-top: 2px solid #444;
-            width: 100%;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            animation: fadeSlideUp 1s ease-out 1.2s forwards;
         }
 
-        /* --- Estilos para la calculadora con colores, diseño y animaciones --- */
-        .calculator-container {
-            background-color: #333; /* Fondo oscuro para la calculadora */
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
-            width: 95%;
-            max-width: 600px;
-            text-align: center;
-            margin-bottom: 50px;
-            border: 1px solid #555;
-            animation: fadeIn 1s ease-out; /* Animación de entrada de la calculadora */
-        }
-
-        @keyframes fadeIn {
-            0% {
+        @keyframes fadeSlideUp {
+            from {
                 opacity: 0;
-                transform: translateY(-20px);
+                transform: translateY(30px);
             }
-            100% {
+            to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        .calculator-container h1 {
-            color: #00bcd4; /* Azul cian brillante */
-            font-size: 2.5em;
-            margin-bottom: 25px;
-            text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
+        /* Social links */
+        .social-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 60px;
+            opacity: 0;
+            animation: fadeSlideUp 1s ease-out 1.5s forwards;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            padding: 15px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .social-link:hover::before {
+            left: 100%;
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .social-link.ciciai {
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.8), rgba(102, 187, 106, 0.8));
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
+        }
+
+        .social-link.cults3d {
+            background: linear-gradient(135deg, rgba(255, 152, 0, 0.8), rgba(255, 183, 77, 0.8));
+            box-shadow: 0 10px 30px rgba(255, 152, 0, 0.3);
+        }
+
+        .social-link.tiktok {
+            background: linear-gradient(135deg, rgba(233, 30, 99, 0.8), rgba(194, 24, 91, 0.8));
+            box-shadow: 0 10px 30px rgba(233, 30, 99, 0.3);
+        }
+
+        .social-link.instagram {
+            background: linear-gradient(135deg, #f44336, #e91e63, #9c27b0, #3f51b5, #2196f3);
+            box-shadow: 0 10px 30px rgba(233, 30, 99, 0.4);
+        }
+
+        .social-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .social-link:hover .social-icon {
+            transform: rotate(360deg) scale(1.1);
+        }
+
+        /* Calculator container */
+        .calculator-container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            width: 95%;
+            max-width: 600px;
+            text-align: center;
+            margin-bottom: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            animation: fadeSlideUp 1s ease-out 2s forwards;
+        }
+
+        .calculator-container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #00ffff, #ff0080, #ffff00, #00ff80);
+            border-radius: 25px;
+            z-index: -1;
+            animation: borderGlow 3s linear infinite;
+        }
+
+        @keyframes borderGlow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .calculator-title {
+            font-family: 'Orbitron', monospace;
+            color: #00ffff;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            margin-bottom: 30px;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            font-weight: 700;
+        }
+
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
         }
 
         .input-group {
-            margin-bottom: 20px;
             text-align: left;
         }
 
-        .calculator-container label {
+        .input-group label {
             display: block;
             margin-bottom: 8px;
-            font-weight: bold;
-            color: #eee;
-            font-size: 1.1em;
+            font-weight: 600;
+            color: #ffffff;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .calculator-container input::-webkit-outer-spin-button,
-        .calculator-container input::-webkit-inner-spin-button {
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+            font-size: 1rem;
+            font-family: 'Exo 2', sans-serif;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #00ffff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .input-group input::-webkit-outer-spin-button,
+        .input-group input::-webkit-inner-spin-button {
             -webkit-appearance: none;
             margin: 0;
         }
 
-        .calculator-container input {
-            width: calc(100% - 22px);
-            padding: 12px;
-            border: 1px solid #777;
-            border-radius: 6px;
-            background-color: #444;
-            color: #fff;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-
-        .calculator-container input:focus {
-            outline: none;
-            border-color: #00bcd4; /* Resaltado azul cian al enfocar */
-            box-shadow: 0 0 8px rgba(0, 188, 212, 0.5);
-        }
-
-        button {
-            background-color: #00bcd4; /* Azul cian para el botón */
-            color: #222;
-            padding: 15px 30px;
+        .calculate-btn {
+            background: linear-gradient(135deg, #00ffff, #0080ff);
+            color: #000;
+            padding: 18px 40px;
             border: none;
-            border-radius: 8px;
-            font-size: 1.2em;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
             cursor: pointer;
-            /* Transiciones para las animaciones del botón */
-            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-            margin-top: 30px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            margin-top: 20px;
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
         }
 
-        button:hover {
-            background-color: #008ba7; /* Cian más oscuro al pasar el ratón */
-            transform: scale(1.05); /* Ligeramente más grande al pasar el ratón */
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+        .calculate-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
         }
 
+        .calculate-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 255, 255, 0.4);
+        }
+
+        .calculate-btn:active {
+            transform: translateY(-1px) scale(1.02);
+        }
+
+        /* Results */
         .result {
-            margin-top: 40px;
-            padding: 20px;
-            background-color: #444;
-            border-radius: 8px;
-            border: 1px solid #777;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-            opacity: 0; /* Inicialmente oculto */
-            transform: translateY(10px); /* Ligeramente desplazado */
-            /* Transición para la aparición del resultado */
-            transition: opacity 0.5s ease, transform 0.5s ease;
+            margin-top: 30px;
+            padding: 25px;
+            background: rgba(0, 255, 255, 0.1);
+            border-radius: 20px;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            opacity: 0;
+            transform: translateY(20px) scale(0.9);
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         .result.show {
-            opacity: 1; /* Se hace visible */
-            transform: translateY(0); /* Vuelve a su posición original */
+            opacity: 1;
+            transform: translateY(0) scale(1);
         }
 
         .result h2 {
-            margin-top: 0;
-            color: #00bcd4;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-            font-size: 1.8em;
             margin-bottom: 15px;
+            color: #00ffff;
+            font-family: 'Orbitron', monospace;
+            font-size: 1.5rem;
+            text-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
         }
 
         .result p {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #aeea00; /* Verde lima brillante para el costo */
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            font-size: clamp(2rem, 6vw, 3rem);
+            font-weight: 700;
+            color: #00ff80;
+            text-shadow: 0 0 20px rgba(0, 255, 128, 0.5);
+            font-family: 'Orbitron', monospace;
         }
 
-        /* Responsive adjustments */
+        .cost-breakdown {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        .cost-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .cost-item:last-child {
+            border-bottom: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #00ff80;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 60px;
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            width: 100%;
+            font-size: 1.1rem;
+            color: #888;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            body {
-                padding: 20px;
+            .container {
+                padding: 15px;
             }
 
-            header {
-                margin-bottom: 30px;
+            .calculator-container {
+                padding: 25px;
+                margin-bottom: 40px;
             }
 
-            .main-title {
-                font-size: 3em;
-            }
-
-            .sub-title {
-                font-size: 1.5em;
+            .input-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
             }
 
             .social-links {
                 gap: 15px;
-                margin-bottom: 40px;
             }
 
             .social-link {
-                font-size: 1em;
-                padding: 10px 15px;
-            }
-
-            .social-icon {
-                width: 24px;
-                height: 24px;
-            }
-
-            .calculator-container {
-                padding: 30px;
-                margin-bottom: 40px;
-            }
-
-            .calculator-container h1 {
-                font-size: 2.2em;
-                margin-bottom: 20px;
-            }
-
-            .input-group {
-                margin-bottom: 15px;
-            }
-
-            button {
-                font-size: 1.1em;
-                padding: 12px 25px;
-                margin-top: 25px;
-            }
-
-            .result {
-                margin-top: 30px;
-                padding: 15px;
-            }
-
-            .result h2 {
-                font-size: 1.6em;
-                margin-bottom: 10px;
-            }
-
-            .result p {
-                font-size: 1.8em;
+                font-size: 0.9rem;
+                padding: 12px 20px;
             }
         }
     </style>
 </head>
 <body>
-
-    <header>
-        <h1 class="main-title">PRINTAPLAB</h1>
-        <h2 class="sub-title">3D STORE</h2>
-        <p class="brand-slogan">Printaplab 3D Store</p>
-        <p class="social-text">Síguenos en nuestras redes sociales</p>
-    </header>
-
-    <div class="social-links">
-        <a href="https://www.ciciai.com/bot/ucrGrdZW" target="_blank" class="social-link ciciai">
-            <svg class="social-icon" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-            </svg>
-            Ciciai Bot
-        </a>
-
-        <a href="https://cults3d.com/es/usuarios/printaplab3d/modelos-3d" target="_blank" class="social-link cults3d">
-            <svg class="social-icon" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M21 8V7l-3 2-3-2v1c0 1.1-.9 2-2 2s-2-.9-2-2V7L8 9l3 2v1c0 1.1.9 2 2 2s2-.9 2-2v-1l3 2 3-2v-1z"/>
-            </svg>
-            Modelos 3D
-        </a>
-
-        <a href="https://www.tiktok.com/@printaplab3dstore" target="_blank" class="social-link tiktok">
-            <svg class="social-icon" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M19.321 5.562a5.122 5.122 0 0 1-.443-.258 6.228 6.228 0 0 1-1.137-.966c-.849-1.011-1.149-2.291-1.149-2.291H13.53v11.928c0 2.404-1.798 4.352-4.013 4.352-2.215 0-4.013-1.948-4.013-4.352 0-2.404 1.798-4.352 4.013-4.352.22 0 .434.018.642.05V6.645c-.208-.027-.418-.04-.642-.04C4.486 6.605 0 11.091 0 16.622s4.486 10.017 9.517 10.017 9.517-4.486 9.517-10.017V9.468a10.94 10.94 0 0 0 6.348 2.018v-3.062c-1.694 0-3.24-.54-4.514-1.456l.453-.406z"/>
-            </svg>
-            TikTok
-        </a>
-
-        <a href="https://www.instagram.com/printaplab3dstore" target="_blank" class="social-link instagram">
-            <svg class="social-icon" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-            </svg>
-            Instagram
-        </a>
+    <div class="bg-animation"></div>
+    
+    <div class="particles">
+        <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+        <div class="particle" style="left: 20%; animation-delay: 1s;"></div>
+        <div class="particle" style="left: 30%; animation-delay: 2s;"></div>
+        <div class="particle" style="left: 40%; animation-delay: 3s;"></div>
+        <div class="particle" style="left: 50%; animation-delay: 4s;"></div>
+        <div class="particle" style="left: 60%; animation-delay: 5s;"></div>
+        <div class="particle" style="left: 70%; animation-delay: 0.5s;"></div>
+        <div class="particle" style="left: 80%; animation-delay: 1.5s;"></div>
+        <div class="particle" style="left: 90%; animation-delay: 2.5s;"></div>
     </div>
 
-    <div class="calculator-container">
-        <h1>Calculadora de Costos de Impresión FDM</h1>
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <h1 class="main-title">PRINTAPLAB</h1>
+            </div>
+            <h2 class="sub-title">3D STORE</h2>
+            <p class="brand-slogan">Printaplab 3D Store</p>
+            <p class="social-text">Síguenos en nuestras redes sociales</p>
+        </header>
 
-        <div class="input-group">
-            <label for="materialCost">Costo del Filamento (ARS/kg):</label>
-            <input type="number" id="materialCost" value="25000" step="0.01">
+        <div class="social-links">
+            <a href="https://www.ciciai.com/bot/ucrGrdZW" target="_blank" class="social-link ciciai">
+                <svg class="social-icon" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+                Ciciai Bot
+            </a>
+
+            <a href="https://cults3d.com/es/usuarios/printaplab3d/modelos-3d" target="_blank" class="social-link cults3d">
+                <svg class="social-icon" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M21 8V7l-3 2-3-2v1c0 1.1-.9 2-2 2s-2-.9-2-2V7L8 9l3 2v1c0 1.1.9 2 2 2s2-.9 2-2v-1l3 2 3-2v-1z"/>
+                </svg>
+                Modelos 3D
+            </a>
+
+            <a href="https://www.tiktok.com/@printaplab3dstore" target="_blank" class="social-link tiktok">
+                <svg class="social-icon" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19.321 5.562a5.122 5.122 0 0 1-.443-.258 6.228 6.228 0 0 1-1.137-.966c-.849-1.011-1.149-2.291-1.149-2.291H13.53v11.928c0 2.404-1.798 4.352-4.013 4.352-2.215 0-4.013-1.948-4.013-4.352 0-2.404 1.798-4.352 4.013-4.352.22 0 .434.018.642.05V6.645c-.208-.027-.418-.04-.642-.04C4.486 6.605 0 11.091 0 16.622s4.486 10.017 9.517 10.017 9.517-4.486 9.517-10.017V9.468a10.94 10.94 0 0 0 6.348 2.018v-3.062c-1.694 0-3.24-.54-4.514-1.456l.453-.406z"/>
+                </svg>
+                TikTok
+            </a>
+
+            <a href="https://www.instagram.com/printaplab3dstore" target="_blank" class="social-link instagram">
+                <svg class="social-icon" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+                Instagram
+            </a>
         </div>
 
-        <div class="input-group">
-            <label for="weight">Peso de la Pieza (gramos):</label>
-            <input type="number" id="weight" value="10" step="0.01">
-        </div>
+        <div class="calculator-container">
+            <h1 class="calculator-title">Calculadora de Costos FDM</h1>
 
-        <div class="input-group">
-            <label for="printTime">Tiempo de Impresión (horas):</label>
-            <input type="number" id="printTime" value="1" step="0.01">
-        </div>
+            <div class="input-grid">
+                <div class="input-group">
+                    <label for="materialCost">Costo del Filamento (ARS/kg)</label>
+                    <input type="number" id="materialCost" value="25000" step="0.01">
+                </div>
 
-        <div class="input-group">
-            <label for="powerCost">Costo de Energía (ARS/kWh):</label>
-            <input type="number" id="powerCost" value="80" step="0.001">
-        </div>
+                <div class="input-group">
+                    <label for="weight">Peso de la Pieza (gramos)</label>
+                    <input type="number" id="weight" value="10" step="0.01">
+                </div>
 
-        <div class="input-group">
-            <label for="powerConsumption">Consumo de Impresora (watts):</label>
-            <input type="number" id="powerConsumption" value="100" step="1">
-        </div>
+                <div class="input-group">
+                    <label for="printTime">Tiempo de Impresión (horas)</label>
+                    <input type="number" id="printTime" value="1" step="0.01">
+                </div>
 
-        <div class="input-group">
-            <label for="laborCostPerHour">Costo Mano de Obra (ARS/hora):</label>
-            <input type="number" id="laborCostPerHour" value="1500" step="0.01">
-        </div>
+                <div class="input-group">
+                    <label for="powerCost">Costo de Energía (ARS/kWh)</label>
+                    <input type="number" id="powerCost" value="80" step="0.001">
+                </div>
 
-        <div class="input-group">
-            <label for="extraMaterialsCost">Costos Materiales Extra (ARS):</label>
-            <input type="number" id="extraMaterialsCost" value="0" step="0.01">
-        </div>
+                <div class="input-group">
+                    <label for="powerConsumption">Consumo de Impresora (watts)</label>
+                    <input type="number" id="powerConsumption" value="100" step="1">
+                </div>
 
-        <div class="input-group">
-            <label for="markup">Margen de Ganancia (%):</label>
-            <input type="number" id="markup" value="50" step="1">
-        </div>
+                <div class="input-group">
+                    <label for="laborCostPerHour">Costo Mano de Obra (ARS/hora)</label>
+                    <input type="number" id="laborCostPerHour" value="1500" step="0.01">
+                </div>
 
-        <button onclick="calculateCost()">Calcular Costo</button>
+                <div class="input-group">
+                    <label for="extraMaterialsCost">Costos Materiales Extra (ARS)</label>
+                    <input type="number" id="extraMaterialsCost" value="0" step="0.01">
+                </div>
 
-        <div class="result">
-            <h2>Costo Total Estimado:</h2>
-            <p id="totalCost">$0.00</p>
-        </div>
-    </div>
-
-    <div class="footer">
-        ✨ Impresión 3D de calidad ✨
-    </div>
-
-    <script>
-        function calculateCost() {
-            // Obtener los valores de los inputs existentes
-            const materialCostPerKg = parseFloat(document.getElementById('materialCost').value);
-            const weightGrams = parseFloat(document.getElementById('weight').value);
-            const printTimeHours = parseFloat(document.getElementById('printTime').value);
-            const powerCostPerKwh = parseFloat(document.getElementById('powerCost').value);
-            const powerConsumptionWatts = parseFloat(document.getElementById('powerConsumption').value);
-
-            // Obtener los nuevos valores para mano de obra y materiales extra
-            const laborCostPerHour = parseFloat(document.getElementById('laborCostPerHour').value);
-            const extraMaterialsCost = parseFloat(document.getElementById('extraMaterialsCost').value);
-
-            const markupPercentage = parseFloat(document.getElementById('markup').value);
-
-            // Validar que los inputs sean números válidos
-            if (isNaN(materialCostPerKg) || isNaN(weightGrams) || isNaN(printTimeHours) ||
-                isNaN(powerCostPerKwh) || isNaN(powerConsumptionWatts) ||
-                isNaN(laborCostPerHour) || isNaN(extraMaterialsCost) || isNaN(markupPercentage)) {
-                document.getElementById('totalCost').textContent = "Por favor, ingresa valores válidos.";
-                document.getElementById('totalCost').style.color = "red"; // Cambiar color a rojo para errores
-                
-                // Si hay un error, ocultar el resultado o quitar la clase 'show'
-                const resultDiv = document.querySelector('.result');
-                resultDiv.classList.remove('show');
-                return;
-            }
-
-            // Cálculo del costo de material
-            const materialCost = (materialCostPerKg / 1000) * weightGrams; // Convertir kg a gramos
-
-            // Cálculo del costo de energía
-            const powerConsumptionKw = powerConsumptionWatts / 1000; // Convertir watts a kilowatts
-            const energyCost = powerConsumptionKw * printTimeHours * powerCostPerKwh;
-
-            // Cálculo del costo de mano de obra
-            const laborCost = printTimeHours * laborCostPerHour;
-
-            // Costo base (material + energía + mano de obra + materiales extra)
-            const baseCost = materialCost + energyCost + laborCost + extraMaterialsCost;
-
-            // Calcular el margen de ganancia
-            const profit = baseCost * (markupPercentage / 100);
-
-            // Costo total
-            const totalCost = baseCost + profit;
-
-            // Mostrar el resultado con el símbolo de pesos argentinos
-            document.getElementById('totalCost').textContent = `$${totalCost.toFixed(2)}`;
-            document.getElementById('totalCost').style.color = "#aeea00"; // Usar el verde lima brillante para el costo
-
-            // Mostrar el resultado con animación
-            const resultDiv = document.querySelector('.result');
-            resultDiv.classList.add('show');
-        }
-    </script>
-</body>
-</html>
+                <div class="input-group">
+                    <label for="markup">Margen de Ganancia (%)</l
