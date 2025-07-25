@@ -31,6 +31,58 @@
         .social-link.instagram { background: linear-gradient(135deg, #f44336, #e91e63, #9c27b0, #3f51b5, #2196f3); }
         .social-icon { width: 24px; height: 24px; margin-right: 10px; transition: transform 0.3s ease; }
         .social-link:hover .social-icon { transform: rotate(360deg) scale(1.1); }
+        
+        /* Nuevo botón especial */
+        .special-button-container { margin-bottom: 40px; }
+        .special-button { 
+            display: inline-flex; 
+            align-items: center; 
+            padding: 20px 40px; 
+            border-radius: 50px; 
+            text-decoration: none; 
+            font-weight: 700; 
+            font-size: 1.2rem; 
+            transition: all 0.4s; 
+            backdrop-filter: blur(15px); 
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            background: linear-gradient(135deg, rgba(255, 20, 147, 0.8), rgba(138, 43, 226, 0.8));
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+        .special-button::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ff1493, #8a2be2, #00ffff, #ff0080);
+            border-radius: 50px;
+            z-index: -1;
+            animation: borderPulse 2s linear infinite;
+        }
+        @keyframes borderPulse { 
+            0%, 100% { opacity: 0.7; } 
+            50% { opacity: 1; } 
+        }
+        .special-button:hover { 
+            transform: translateY(-8px) scale(1.08); 
+            box-shadow: 0 25px 50px rgba(255, 20, 147, 0.4);
+            background: linear-gradient(135deg, rgba(255, 20, 147, 1), rgba(138, 43, 226, 1));
+        }
+        .special-button-icon { 
+            width: 28px; 
+            height: 28px; 
+            margin-right: 12px; 
+            transition: transform 0.3s ease; 
+        }
+        .special-button:hover .special-button-icon { 
+            transform: rotate(360deg) scale(1.2); 
+        }
+        
         .calculator-container { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); padding: 40px; border-radius: 25px; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3); width: 95%; max-width: 600px; text-align: center; margin-bottom: 50px; border: 1px solid rgba(255, 255, 255, 0.1); position: relative; overflow: hidden; }
         .calculator-container::before { content: ''; position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px; background: linear-gradient(45deg, #00ffff, #ff0080, #ffff00, #00ff80); border-radius: 25px; z-index: -1; animation: borderGlow 3s linear infinite; }
         @keyframes borderGlow { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
@@ -50,7 +102,7 @@
         .cost-item { display: flex; justify-content: space-between; margin-bottom: 8px; padding: 5px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
         .cost-item:last-child { border-bottom: none; font-weight: 700; font-size: 1.1rem; color: #00ff80; }
         .footer { margin-top: 60px; text-align: center; padding: 30px; border-top: 1px solid rgba(255, 255, 255, 0.1); width: 100%; font-size: 1.1rem; color: #888; }
-        @media (max-width: 768px) { .container { padding: 15px; } .calculator-container { padding: 25px; } .input-grid { grid-template-columns: 1fr; gap: 15px; } .social-links { gap: 15px; } .social-link { font-size: 0.9rem; padding: 12px 20px; } }
+        @media (max-width: 768px) { .container { padding: 15px; } .calculator-container { padding: 25px; } .input-grid { grid-template-columns: 1fr; gap: 15px; } .social-links { gap: 15px; } .social-link { font-size: 0.9rem; padding: 12px 20px; } .special-button { font-size: 1rem; padding: 16px 32px; } }
     </style>
 </head>
 <body>
@@ -105,6 +157,16 @@
                     <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                 </svg>
                 Instagram
+            </a>
+        </div>
+
+        <!-- Nuevo botón especial -->
+        <div class="special-button-container">
+            <a href="https://printaplab3dstore.github.io/funkos.html" target="_blank" class="special-button">
+                <svg class="special-button-icon" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+                Funkos Personalizados
             </a>
         </div>
 
@@ -197,6 +259,11 @@
             `;
 
             document.getElementById('result').classList.add('show');
+        }
+
+        function handleSpecialButton() {
+            alert('¡Botón especial activado! Aquí puedes agregar cualquier funcionalidad que necesites.');
+            // Aquí puedes agregar la funcionalidad que quieras para el botón
         }
     </script>
 </body>
