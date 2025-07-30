@@ -28,12 +28,19 @@
         .social-link.ciciai { background: linear-gradient(135deg, rgba(76, 175, 80, 0.8), rgba(102, 187, 106, 0.8)); }
         .social-link.cults3d { background: linear-gradient(135deg, rgba(255, 152, 0, 0.8), rgba(255, 183, 77, 0.8)); }
         .social-link.tiktok { background: linear-gradient(135deg, rgba(233, 30, 99, 0.8), rgba(194, 24, 91, 0.8)); }
-        .social-link.instagram { background: linear-gradient(135deg, #f44336, #e91e63, #9c27b0, #3f51b5, #2196f3); }
+        .social-link.instagram { background: linear-gradient(135deg, #f44336, #e91e63, #9c27b0, #3f51b0, #2196f3); }
         .social-icon { width: 24px; height: 24px; margin-right: 10px; transition: transform 0.3s ease; }
         .social-link:hover .social-icon { transform: rotate(360deg) scale(1.1); }
         
-        /* Nuevo botón especial */
-        .special-button-container { margin-bottom: 40px; }
+        /* Contenedor de botones especiales */
+        .special-buttons-container { 
+            margin-bottom: 40px; 
+            display: flex; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            gap: 20px; 
+        }
+        
         .special-button { 
             display: inline-flex; 
             align-items: center; 
@@ -45,14 +52,18 @@
             transition: all 0.4s; 
             backdrop-filter: blur(15px); 
             border: 2px solid rgba(255, 255, 255, 0.2);
-            background: linear-gradient(135deg, rgba(255, 20, 147, 0.8), rgba(138, 43, 226, 0.8));
             color: #fff;
             text-transform: uppercase;
             letter-spacing: 2px;
             position: relative;
             overflow: hidden;
         }
-        .special-button::before {
+
+        /* Botón Funkos (el original) */
+        .special-button.funkos { 
+            background: linear-gradient(135deg, rgba(255, 20, 147, 0.8), rgba(138, 43, 226, 0.8));
+        }
+        .special-button.funkos::before {
             content: '';
             position: absolute;
             top: -2px;
@@ -64,15 +75,54 @@
             z-index: -1;
             animation: borderPulse 2s linear infinite;
         }
-        @keyframes borderPulse { 
-            0%, 100% { opacity: 0.7; } 
-            50% { opacity: 1; } 
-        }
-        .special-button:hover { 
+        .special-button.funkos:hover { 
             transform: translateY(-8px) scale(1.08); 
             box-shadow: 0 25px 50px rgba(255, 20, 147, 0.4);
             background: linear-gradient(135deg, rgba(255, 20, 147, 1), rgba(138, 43, 226, 1));
         }
+
+        /* Nuevo botón Diseño Destacado */
+        .special-button.featured { 
+            background: linear-gradient(135deg, rgba(255, 152, 0, 0.9), rgba(255, 193, 7, 0.9));
+            color: #000;
+            position: relative;
+        }
+        .special-button.featured::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ff9800, #ffc107, #ffeb3b, #ff5722);
+            border-radius: 50px;
+            z-index: -1;
+            animation: borderPulse 1.5s linear infinite;
+        }
+        .special-button.featured:hover { 
+            transform: translateY(-8px) scale(1.08); 
+            box-shadow: 0 25px 50px rgba(255, 152, 0, 0.6);
+            background: linear-gradient(135deg, rgba(255, 152, 0, 1), rgba(255, 193, 7, 1));
+        }
+        .special-button.featured::after {
+            content: '🔥';
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            font-size: 24px;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        @keyframes borderPulse { 
+            0%, 100% { opacity: 0.7; } 
+            50% { opacity: 1; } 
+        }
+        
         .special-button-icon { 
             width: 28px; 
             height: 28px; 
@@ -81,6 +131,21 @@
         }
         .special-button:hover .special-button-icon { 
             transform: rotate(360deg) scale(1.2); 
+        }
+        
+        /* Imagen destacada para el botón */
+        .featured-preview {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 12px;
+            border: 2px solid rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        .special-button.featured:hover .featured-preview {
+            transform: scale(1.1) rotate(360deg);
+            border-color: rgba(0, 0, 0, 0.6);
         }
         
         .calculator-container { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); padding: 40px; border-radius: 25px; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3); width: 95%; max-width: 600px; text-align: center; margin-bottom: 50px; border: 1px solid rgba(255, 255, 255, 0.1); position: relative; overflow: hidden; }
@@ -102,7 +167,15 @@
         .cost-item { display: flex; justify-content: space-between; margin-bottom: 8px; padding: 5px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
         .cost-item:last-child { border-bottom: none; font-weight: 700; font-size: 1.1rem; color: #00ff80; }
         .footer { margin-top: 60px; text-align: center; padding: 30px; border-top: 1px solid rgba(255, 255, 255, 0.1); width: 100%; font-size: 1.1rem; color: #888; }
-        @media (max-width: 768px) { .container { padding: 15px; } .calculator-container { padding: 25px; } .input-grid { grid-template-columns: 1fr; gap: 15px; } .social-links { gap: 15px; } .social-link { font-size: 0.9rem; padding: 12px 20px; } .special-button { font-size: 1rem; padding: 16px 32px; } }
+        @media (max-width: 768px) { 
+            .container { padding: 15px; } 
+            .calculator-container { padding: 25px; } 
+            .input-grid { grid-template-columns: 1fr; gap: 15px; } 
+            .social-links { gap: 15px; } 
+            .social-link { font-size: 0.9rem; padding: 12px 20px; } 
+            .special-button { font-size: 1rem; padding: 16px 32px; } 
+            .special-buttons-container { flex-direction: column; align-items: center; }
+        }
     </style>
 </head>
 <body>
@@ -160,13 +233,18 @@
             </a>
         </div>
 
-        <!-- Nuevo botón especial -->
-        <div class="special-button-container">
-            <a href="https://printaplab3dstore.github.io/funkos.html" target="_blank" class="special-button">
+        <!-- Botones especiales -->
+        <div class="special-buttons-container">
+            <a href="https://printaplab3dstore.github.io/funkos.html" target="_blank" class="special-button funkos">
                 <svg class="special-button-icon" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                 </svg>
                 Funkos Personalizados
+            </a>
+
+            <a href="https://cults3d.com/es/modelo-3d/variado/senuelo-mojarra-para-pesca-variada" target="_blank" class="special-button featured">
+                <img src="https://printaplab3dstore.github.io/Stlmoldegenerador/img/senuelo-mojarra.jpg" alt="Señuelo Mojarra" class="featured-preview">
+                🎣 Diseño Destacado
             </a>
         </div>
 
@@ -259,11 +337,6 @@
             `;
 
             document.getElementById('result').classList.add('show');
-        }
-
-        function handleSpecialButton() {
-            alert('¡Botón especial activado! Aquí puedes agregar cualquier funcionalidad que necesites.');
-            // Aquí puedes agregar la funcionalidad que quieras para el botón
         }
     </script>
 </body>
