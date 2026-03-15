@@ -388,6 +388,166 @@
             transform: rotate(360deg) scale(1.3); 
         }
 
+        /* Botón Generador de Huecos - SUPER LLAMATIVO */
+        .huecos-button-container { 
+            margin-bottom: 40px; 
+            animation: fadeInUp 1s ease-out 1.35s both;
+        }
+
+        .huecos-button { 
+            display: inline-flex; 
+            align-items: center; 
+            padding: 12px 28px; 
+            border-radius: 50px; 
+            text-decoration: none; 
+            font-weight: 700; 
+            font-size: 0.95rem; 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            backdrop-filter: blur(20px); 
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: linear-gradient(135deg, #00ff87 0%, #60efff 50%, #0061ff 100%);
+            color: #000;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 0 20px rgba(0, 255, 135, 0.4),
+                0 0 40px rgba(0, 97, 255, 0.2),
+                0 5px 15px rgba(0, 0, 0, 0.3);
+            animation: huecosGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes huecosGlow {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 20px rgba(0, 255, 135, 0.4),
+                    0 0 40px rgba(0, 97, 255, 0.2),
+                    0 5px 15px rgba(0, 0, 0, 0.3);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 35px rgba(0, 255, 135, 0.6),
+                    0 0 70px rgba(0, 97, 255, 0.4),
+                    0 5px 15px rgba(0, 0, 0, 0.3);
+            }
+        }
+
+        .huecos-button::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #00ff87, #60efff, #0061ff, #ff00ff, #00ff87);
+            border-radius: 50px;
+            z-index: -1;
+            animation: borderRainbow 3s linear infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes borderRainbow { 
+            0% { filter: hue-rotate(0deg); } 
+            100% { filter: hue-rotate(360deg); } 
+        }
+
+        .huecos-button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s;
+        }
+
+        .huecos-button:hover::after {
+            left: 100%;
+        }
+
+        .huecos-button:hover { 
+            transform: translateY(-5px) scale(1.05); 
+            box-shadow: 
+                0 0 40px rgba(0, 255, 135, 0.7),
+                0 0 80px rgba(0, 97, 255, 0.5),
+                0 10px 25px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(135deg, #00ff87 0%, #60efff 50%, #ff00ff 100%);
+        }
+
+        .huecos-button-icon { 
+            width: 22px; 
+            height: 22px; 
+            margin-right: 10px; 
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: iconPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes iconPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .huecos-button:hover .huecos-button-icon { 
+            transform: rotate(360deg) scale(1.2); 
+        }
+
+        /* Texto con sombra brillante */
+        .huecos-button span {
+            text-shadow: 
+                0 0 8px rgba(255, 255, 255, 0.6),
+                0 0 15px rgba(255, 255, 255, 0.3);
+        }
+
+        .huecos-button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.6s;
+        }
+
+        .huecos-button:hover::after {
+            left: 100%;
+        }
+
+        .huecos-button:hover { 
+            transform: translateY(-12px) scale(1.1); 
+            box-shadow: 
+                0 0 60px rgba(0, 255, 135, 0.9),
+                0 0 120px rgba(0, 97, 255, 0.6),
+                0 20px 50px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(135deg, #00ff87 0%, #60efff 50%, #ff00ff 100%);
+        }
+
+        .huecos-button-icon { 
+            width: 32px; 
+            height: 32px; 
+            margin-right: 15px; 
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: iconPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes iconPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        .huecos-button:hover .huecos-button-icon { 
+            transform: rotate(360deg) scale(1.4); 
+        }
+
+        /* Texto con sombra brillante */
+        .huecos-button span {
+            text-shadow: 
+                0 0 10px rgba(255, 255, 255, 0.8),
+                0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
         /* CARRUSEL TECNOLÓGICO */
         .carousel-section {
             width: 100%;
@@ -1160,6 +1320,15 @@
                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.5 6L12 10.5 8.5 8 12 5.5 15.5 8zM8.5 16L12 13.5 15.5 16 12 18.5 8.5 16z"/>
                 </svg>
                 Funkos Personalizados
+            </a>
+        </div>
+
+        <div class="huecos-button-container">
+            <a href="https://printaplab3dstore.github.io/Generadordehuecos-/" target="_blank" class="huecos-button" aria-label="Ir al Generador de Huecos">
+                <svg class="huecos-button-icon" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C7.58 2 4 5.58 4 10c0 2.12.91 4.08 2.36 5.47L6 22h12l-.36-6.53C19.09 14.08 20 12.12 20 10c0-4.42-3.58-8-8-8zm0 14c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm-1-7h2v2h-2v-2zm1-4c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/>
+                </svg>
+                <span>Generador de Huecos</span>
             </a>
         </div>
 
