@@ -1580,7 +1580,7 @@
         <!-- ===== SECCIÓN: HERRAMIENTAS DIGITALES ===== -->
         <section class="page-section" id="tools">
             <div class="section-label">🛠️ Herramientas Digitales</div>
-            <div class="tools-grid" style="grid-template-columns: minmax(280px, 380px); justify-content: center;">
+            <div class="tools-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 380px)); justify-content: center;">
 
                 <!-- Card: Generador de Huecos -->
                 <div class="tool-card">
@@ -1593,6 +1593,21 @@
                                 <path d="M12 2C7.58 2 4 5.58 4 10c0 2.12.91 4.08 2.36 5.47L6 22h12l-.36-6.53C19.09 14.08 20 12.12 20 10c0-4.42-3.58-8-8-8zm0 14c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm-1-7h2v2h-2v-2zm1-4c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/>
                             </svg>
                             <span>Generador de Huecos</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card: Auto Slicer Bambú (Escalar y Cortar a Tamaño Real) -->
+                <div class="tool-card">
+                    <div class="tool-card-emoji">📐</div>
+                    <div class="tool-card-title">Escalar y Cortar a Tamaño Real</div>
+                    <p class="tool-card-desc">Escala y corta tus piezas al tamaño exacto para impresión en Bambú Lab</p>
+                    <div class="huecos-button-container">
+                        <a href="https://printaplab3dstore.github.io/auto-slicer-bambu.html" target="_blank" class="huecos-button" aria-label="Ir a Escalar y Cortar Piezas a Tamaño Real">
+                            <svg class="huecos-button-icon" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/>
+                            </svg>
+                            <span>Escalar y Cortar</span>
                         </a>
                     </div>
                 </div>
@@ -2048,6 +2063,9 @@
                 toolHuecos:    'Generador de Huecos',
                 toolHuecosDesc:'Genera tolerancias y huecos precisos para ensambles FDM perfectos',
                 toolHuecosBtn: 'Generador de Huecos',
+                toolSlicer:    'Escalar y Cortar a Tamaño Real',
+                toolSlicerDesc:'Escala y corta tus piezas al tamaño exacto para impresión en Bambú Lab',
+                toolSlicerBtn: 'Escalar y Cortar',
             },
             en: {
                 slogan:    'Organic 3D Design & Custom Modeling',
@@ -2064,6 +2082,9 @@
                 toolHuecos:    'Hole Generator',
                 toolHuecosDesc:'Generate precise tolerances and holes for perfect FDM assemblies',
                 toolHuecosBtn: 'Hole Generator',
+                toolSlicer:    'Scale & Cut to Real Size',
+                toolSlicerDesc:'Scale and cut your parts to the exact size for Bambu Lab printing',
+                toolSlicerBtn: 'Scale & Cut',
             }
         };
 
@@ -2107,6 +2128,12 @@
                 cards[0].querySelector('.tool-card-desc').textContent  = t.toolHuecosDesc;
                 const btn0 = cards[0].querySelector('.huecos-button span');
                 if (btn0) btn0.textContent = t.toolHuecosBtn;
+            }
+            if (cards[1]) {
+                cards[1].querySelector('.tool-card-title').textContent = t.toolSlicer;
+                cards[1].querySelector('.tool-card-desc').textContent  = t.toolSlicerDesc;
+                const btn1 = cards[1].querySelector('.huecos-button span');
+                if (btn1) btn1.textContent = t.toolSlicerBtn;
             }
         }
 
