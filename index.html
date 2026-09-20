@@ -581,10 +581,77 @@
             margin: 60px 0;
         }
 
+        /* ── Carrusel de catálogo ── */
+        .catalog-carousel {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
         .catalog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
             gap: 26px;
+            padding: 6px 4px 16px;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .catalog-grid::-webkit-scrollbar {
+            display: none;
+        }
+
+        .carousel-arrow {
+            flex: 0 0 auto;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            color: var(--accent-cyan);
+            font-size: 1.6rem;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+
+        .carousel-arrow:hover {
+            background: rgba(0, 180, 255, 0.15);
+            border-color: rgba(0, 180, 255, 0.5);
+            transform: scale(1.08);
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 6px;
+        }
+
+        .carousel-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: var(--glass-border);
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-dot.active {
+            background: var(--accent-cyan);
+            width: 24px;
+            border-radius: 5px;
         }
 
         .catalog-card {
@@ -597,6 +664,8 @@
             cursor: pointer;
             display: flex;
             flex-direction: column;
+            flex: 0 0 300px;
+            scroll-snap-align: start;
             transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.35s ease, border-color 0.35s ease;
         }
 
@@ -1096,8 +1165,12 @@
                 align-items: center;
             }
 
-            .catalog-grid {
-                grid-template-columns: 1fr;
+            .catalog-card {
+                flex-basis: 82vw;
+            }
+
+            .carousel-arrow {
+                display: none;
             }
         }
 
@@ -1148,6 +1221,98 @@
 
         [data-theme="light"] .site-nav {
             background: rgba(248, 250, 252, 0.92);
+        }
+
+        /* ── Badge "Nuevo diseño" ── */
+        .new-design-badge {
+            position: relative;
+            z-index: 5;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 24px;
+            margin-bottom: 4px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            padding: 7px 20px 7px 7px;
+            text-decoration: none;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            animation: newBadgePulse 2.5s ease-in-out infinite;
+        }
+
+        .new-design-badge:hover {
+            transform: translateY(-3px);
+            border-color: rgba(0, 180, 255, 0.5);
+        }
+
+        .new-design-badge img {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-cyan);
+            flex: 0 0 auto;
+            animation: badgeImgPop 2.5s ease-in-out infinite;
+        }
+
+        @keyframes badgeImgPop {
+            0%, 60%, 100% { transform: scale(1); }
+            80% { transform: scale(1.45); }
+        }
+
+        .new-design-badge .new-design-text {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .new-design-badge .new-design-label {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            white-space: nowrap;
+            text-shadow: 0 0 12px rgba(0, 180, 255, 0.3);
+        }
+
+        .new-design-badge .new-design-product {
+            font-family: 'Exo 2', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            white-space: normal;
+            max-width: 190px;
+            line-height: 1.25;
+        }
+
+        @keyframes newBadgePulse {
+            0%, 100% { box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25), 0 0 0 0 rgba(0, 180, 255, 0.35); }
+            50% { box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25), 0 0 0 8px rgba(0, 180, 255, 0); }
+        }
+
+        @media (max-width: 768px) {
+            .new-design-badge {
+                margin-top: 12px;
+                padding: 6px 16px 6px 6px;
+                gap: 10px;
+            }
+            .new-design-badge img {
+                width: 46px;
+                height: 46px;
+            }
+            .new-design-badge .new-design-label {
+                font-size: 0.66rem;
+            }
+            .new-design-badge .new-design-product {
+                font-size: 0.6rem;
+                max-width: 140px;
+            }
         }
 
         .nav-brand {
@@ -1499,6 +1664,19 @@
 
     <div class="container">
 
+        <a href="https://cults3d.com/es/modelo-3d/variado/piragua-y-tostonera-boricua-el-combo-que-sabe-a-casa"
+           target="_blank"
+           class="new-design-badge"
+           aria-label="Ver nuevo diseño: Piragua y Tostonera Boricua">
+            <img src="https://raw.githubusercontent.com/printaplab3dstore/Stlmoldegenerador/main/img/piraguatostonera.jpg"
+                 alt="Nuevo diseño Piragua y Tostonera Boricua"
+                 loading="lazy">
+            <span class="new-design-text">
+                <span class="new-design-label">✨ Nuevo diseño</span>
+                <span class="new-design-product">Piragua y Tostonera con Patitas Articuladas</span>
+            </span>
+        </a>
+
         <!-- ===== HERO ===== -->
         <section class="hero-section">
             <header>
@@ -1619,7 +1797,9 @@
         <section class="catalog-section" id="catalogo">
             <div class="section-label">🚀 Catálogo Destacado</div>
 
-            <div class="catalog-grid">
+            <div class="catalog-carousel">
+            <button class="carousel-arrow carousel-arrow-prev" onclick="catalogCarouselMove(-1)" aria-label="Producto anterior">‹</button>
+            <div class="catalog-grid" id="catalogTrack">
                 <!-- Limber de Coco + Taza Moka -->
                 <div class="catalog-card" onclick="window.open('https://cults3d.com/es/modelo-3d/casa/limber-de-coco-taza-moka-boricua-con-patitas-articuladas-combo-para-impre', '_blank')">
                     <div class="catalog-card-image">
@@ -1716,6 +1896,9 @@
                     </div>
                 </div>
             </div>
+            <button class="carousel-arrow carousel-arrow-next" onclick="catalogCarouselMove(1)" aria-label="Producto siguiente">›</button>
+            </div>
+            <div class="carousel-dots" id="catalogDots"></div>
         </section>
 
         <div class="calculator-container" id="calculadora">
@@ -2515,6 +2698,84 @@ www.printaplab3dstore.com
                 }
             });
         }, observerOptions);
+
+        // ================= CARRUSEL DE CATÁLOGO =================
+        let catalogAutoplayTimer = null;
+
+        function catalogCarouselMove(direction) {
+            const track = document.getElementById('catalogTrack');
+            if (!track) return;
+            const card = track.querySelector('.catalog-card');
+            if (!card) return;
+            const gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 26;
+            const step = card.getBoundingClientRect().width + gap;
+
+            const maxScroll = track.scrollWidth - track.clientWidth;
+            if (direction > 0 && track.scrollLeft >= maxScroll - 5) {
+                track.scrollTo({ left: 0, behavior: 'smooth' });
+            } else if (direction < 0 && track.scrollLeft <= 5) {
+                track.scrollTo({ left: maxScroll, behavior: 'smooth' });
+            } else {
+                track.scrollBy({ left: step * direction, behavior: 'smooth' });
+            }
+        }
+
+        function initCatalogCarousel() {
+            const track = document.getElementById('catalogTrack');
+            const dotsContainer = document.getElementById('catalogDots');
+            if (!track || !dotsContainer) return;
+
+            const cards = Array.from(track.querySelectorAll('.catalog-card'));
+            if (cards.length === 0) return;
+
+            dotsContainer.innerHTML = '';
+            cards.forEach((_, i) => {
+                const dot = document.createElement('button');
+                dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+                dot.setAttribute('aria-label', `Ir al producto ${i + 1}`);
+                dot.addEventListener('click', () => {
+                    const gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 26;
+                    const step = cards[0].getBoundingClientRect().width + gap;
+                    track.scrollTo({ left: step * i, behavior: 'smooth' });
+                });
+                dotsContainer.appendChild(dot);
+            });
+
+            const dots = Array.from(dotsContainer.children);
+
+            function updateActiveDot() {
+                const gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 26;
+                const step = cards[0].getBoundingClientRect().width + gap;
+                const index = Math.round(track.scrollLeft / step);
+                dots.forEach((d, i) => d.classList.toggle('active', i === Math.min(index, dots.length - 1)));
+            }
+
+            track.addEventListener('scroll', () => {
+                window.requestAnimationFrame(updateActiveDot);
+            }, { passive: true });
+
+            function startAutoplay() {
+                stopAutoplay();
+                catalogAutoplayTimer = setInterval(() => catalogCarouselMove(1), 4500);
+            }
+
+            function stopAutoplay() {
+                if (catalogAutoplayTimer) {
+                    clearInterval(catalogAutoplayTimer);
+                    catalogAutoplayTimer = null;
+                }
+            }
+
+            const wrapper = track.closest('.catalog-carousel');
+            wrapper.addEventListener('mouseenter', stopAutoplay);
+            wrapper.addEventListener('mouseleave', startAutoplay);
+            wrapper.addEventListener('touchstart', stopAutoplay, { passive: true });
+            wrapper.addEventListener('touchend', () => setTimeout(startAutoplay, 3000), { passive: true });
+
+            startAutoplay();
+        }
+
+        document.addEventListener('DOMContentLoaded', initCatalogCarousel);
 
         // Observar elementos para animaciones
         document.addEventListener('DOMContentLoaded', () => {
