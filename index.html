@@ -1315,7 +1315,59 @@
             }
         }
 
-        .nav-brand {
+/* ── Badge "Nuevo diseño" en formato destacado (foto grande) ── */
+        .new-design-badge {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 0;
+            width: min(100%, 440px);
+            margin: 20px auto 8px;
+            padding: 0;
+            border-radius: 22px;
+            overflow: hidden;
+        }
+        .new-design-badge img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 4 / 3;
+            max-height: 340px;
+            border-radius: 0;
+            border: none;
+            border-bottom: 2px solid var(--accent-cyan);
+            object-fit: cover;
+            animation: none;
+        }
+        .new-design-badge .new-design-text {
+            padding: 12px 18px 14px;
+            text-align: center;
+            align-items: center;
+        }
+        .new-design-badge .new-design-label {
+            font-size: 0.9rem;
+            white-space: normal;
+        }
+        .new-design-badge .new-design-product {
+            font-size: 0.85rem;
+            max-width: none;
+        }
+        @media (max-width: 768px) {
+            .new-design-badge {
+                width: 100%;
+                margin-top: 14px;
+                padding: 0;
+                gap: 0;
+            }
+            .new-design-badge img {
+                width: 100%;
+                height: auto;
+                max-height: 300px;
+            }
+            .new-design-badge .new-design-label { font-size: 0.8rem; }
+            .new-design-badge .new-design-product { font-size: 0.78rem; max-width: none; }
+        }
+
+                .nav-brand {
             font-family: 'Orbitron', monospace;
             font-size: 1rem;
             font-weight: 900;
@@ -1664,16 +1716,16 @@
 
     <div class="container">
 
-        <a href="https://cults3d.com/es/modelo-3d/variado/piragua-y-tostonera-boricua-el-combo-que-sabe-a-casa"
+        <a href="https://cults3d.com/es/modelo-3d/variado/garita-can-cooler-with-handle-straw-lid-puerto-rico-sentry-box-koozie"
            target="_blank"
            class="new-design-badge"
-           aria-label="Ver nuevo diseño: Piragua y Tostonera Boricua">
-            <img src="https://raw.githubusercontent.com/printaplab3dstore/Stlmoldegenerador/main/img/piraguatostonera.jpg"
-                 alt="Nuevo diseño Piragua y Tostonera Boricua"
+           aria-label="Ver nuevo diseño: Garita Porta Latas Boricua">
+            <img src="https://raw.githubusercontent.com/printaplab3dstore/Stlmoldegenerador/main/img/garitaportalatas.jpg"
+                 alt="Nuevo diseño Garita Porta Latas Boricua"
                  loading="lazy">
             <span class="new-design-text">
-                <span class="new-design-label">✨ Nuevo diseño</span>
-                <span class="new-design-product">Piragua y Tostonera con Patitas Articuladas</span>
+                <span class="new-design-label">🔥 Nuevo diseño · Más vendido</span>
+                <span class="new-design-product">Garita Porta Latas Boricua con Asa y Tapa</span>
             </span>
         </a>
 
@@ -1689,7 +1741,7 @@
             </header>
             <!-- Donate CTA destacado en el hero -->
             <div class="hero-donate">
-                <a href="https://cults3d.com/es/usuarios/printaplab3d/modelos-3d" target="_blank" class="social-link cults3d" style="font-size:1rem; padding:16px 36px; animation: donateGlow 3s ease-in-out infinite;" aria-label="Ver modelos 3D en Cults3D">
+                <a href="https://cults3d.com/es/modelo-3d/variado/garita-can-cooler-with-handle-straw-lid-puerto-rico-sentry-box-koozie/modelos-3d" target="_blank" class="social-link cults3d" style="font-size:1rem; padding:16px 36px; animation: donateGlow 3s ease-in-out infinite;" aria-label="Ver modelos 3D en Cults3D">
                     <svg class="social-icon" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
                     </svg>
@@ -1725,7 +1777,7 @@
                     TikTok
                 </a>
 
-                <a href="https://cults3d.com/es/usuarios/printaplab3d/modelos-3d" target="_blank" class="social-link cults3d" aria-label="Ver modelos 3D en Cults3D">
+                <a href="https://cults3d.com/es/modelo-3d/variado/garita-can-cooler-with-handle-straw-lid-puerto-rico-sentry-box-koozie/modelos-3d" target="_blank" class="social-link cults3d" aria-label="Ver modelos 3D en Cults3D">
                     <svg class="social-icon" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
                     </svg>
@@ -1800,6 +1852,30 @@
             <div class="catalog-carousel">
             <button class="carousel-arrow carousel-arrow-prev" onclick="catalogCarouselMove(-1)" aria-label="Producto anterior">‹</button>
             <div class="catalog-grid" id="catalogTrack">
+                <!-- Garita Porta Latas -->
+                <div class="catalog-card" onclick="window.open('https://cults3d.com/es/modelo-3d/variado/garita-can-cooler-with-handle-straw-lid-puerto-rico-sentry-box-koozie', '_blank')">
+                    <div class="catalog-card-image">
+                        <img src="https://raw.githubusercontent.com/printaplab3dstore/Stlmoldegenerador/main/img/garitaportalatas.jpg" 
+                             alt="Garita Porta Latas Boricua con Asa y Tapa con Pajita" 
+                             loading="lazy">
+                    </div>
+                    <div class="catalog-card-body">
+                        <h3 class="catalog-card-title">🇵🇷 Garita Porta Latas</h3>
+                        <p class="catalog-card-desc">
+                            Porta latas con forma de garita del Viejo San Juan, con asa, tapa con orificio para pajita y bandera de Puerto Rico. ¡El diseño más vendido!
+                        </p>
+                        <a href="https://cults3d.com/es/modelo-3d/variado/garita-can-cooler-with-handle-straw-lid-puerto-rico-sentry-box-koozie" 
+                           target="_blank" 
+                           class="catalog-card-cta"
+                           onclick="event.stopPropagation()">
+                            Ver Modelo
+                            <svg fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3m-2 16H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7h-2v7z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
                 <!-- Limber de Coco + Taza Moka -->
                 <div class="catalog-card" onclick="window.open('https://cults3d.com/es/modelo-3d/casa/limber-de-coco-taza-moka-boricua-con-patitas-articuladas-combo-para-impre', '_blank')">
                     <div class="catalog-card-image">
